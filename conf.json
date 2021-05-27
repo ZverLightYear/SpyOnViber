@@ -1,0 +1,15 @@
+{
+    "database": {
+        "app_db": {
+             "ENGINE": "postgresql+psycopg2",
+             "USER": "sov_user",
+             "PASSWORD": "sov_user",
+             "HOST": "localhost",
+             "DB_NAME": "sov_db"
+        },
+        "viber_db": {
+            "ENGINE": "sqlite",
+            "DB_NAME": "/home/zver/.ViberPC/79629695983/viber.db"
+        }
+    }
+}
