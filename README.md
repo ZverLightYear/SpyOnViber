@@ -26,6 +26,9 @@ usage: spy_client.py
         }
     }
     "settings": {
+        "logging": {
+            "level": "DEBUG"
+        },
         "process_sleep_time": 5
     }    
 }
@@ -38,4 +41,5 @@ usage: spy_client.py
 
 `settings` - хранит настройки клиента сбора сообщений.
   * `process_sleep_time` - таймаут сбора новых сообщений.
-
+  * `logging` - настройки логирования сообщений. 
+    * `level` - `DEBUG` включает логирование. Все остальное выключает =)
