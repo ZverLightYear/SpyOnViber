@@ -9,5 +9,5 @@ class Chat(declarative_base()):
     __tablename__ = "Chat"
     ChatID = Column(Integer, primary_key=True)
     Name = Column(String(200))
-    TabLine = Column(String(255))
-    MetaData = Column(String(255))
+    TabLine = Column(String)
+    MetaData = Column(String)

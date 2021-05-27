@@ -1,26 +1,9 @@
 import json
 
-from core.viber_db_controller import ViberDatabaseController
-from core.app_db_controller import ApplicationDatabaseController
+from core.db_controllers.viber_db_controller import ViberDatabaseController
+from core.db_controllers.app_db_controller import ApplicationDatabaseController
 
-from core.models.app.chat import Chat
-from core.models.app.contact import Contact
-from core.models.app.chat_relation import ChatRelation
-from core.models.app.message import Message
-
-
-def install_app_db(app_engine):
-    Chat.__table__.create(app_engine, checkfirst=True)
-    Contact.__table__.create(app_engine, checkfirst=True)
-    ChatRelation.__table__.create(app_engine, checkfirst=True)
-    Message.__table__.create(app_engine, checkfirst=True)
-
-def drop_app_db(app_engine):
-    Message.__table__.drop(app_engine, checkfirst=True)
-    ChatRelation.__table__.drop(app_engine, checkfirst=True)
-    Contact.__table__.drop(app_engine, checkfirst=True)
-    Chat.__table__.drop(app_engine, checkfirst=True)
-
+from core.adapters.viber_to_app.viber_to_app_database_adapter import ViberToAppDatabaseAdapter
 
 if __name__ == '__main__':
     conf = json.load(open(r"conf.json"))
@@ -32,14 +15,14 @@ if __name__ == '__main__':
     viber_dbc = ViberDatabaseController(viber_db_conf)
     app_dbc = ApplicationDatabaseController(app_db_conf)
 
-    viber_dbc.connect()
-    app_dbc.connect()
+    app_dbc.drop()
+    app_dbc.create()
 
-    # drop_app_db(app_dbc.engine)
-    # install_app_db(app_dbc.engine)
+    v2a_db_adapter = ViberToAppDatabaseAdapter(viber_dbc, app_dbc)
+    v2a_db_adapter.translate_chat()
+    v2a_db_adapter.translate_contact()
+    v2a_db_adapter.translate_chat_relation()
+    v2a_db_adapter.translate_message()
 
-    for msg in viber_dbc.get_messages_list():
-        print(msg)
-
-    viber_dbc.close()
-    app_dbc.close()
+    viber_dbc.disconnect()
+    app_dbc.disconnect()
