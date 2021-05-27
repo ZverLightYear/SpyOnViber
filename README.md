@@ -6,6 +6,7 @@ usage: spy_client.py
 Реализация на Python3.8
 ## Requirements:
   * sqlalchemy >= 1.4.15
+  * termcolor >= 1.1.0
 
 ## Пример конфигурационного файла conf.json:
 ```

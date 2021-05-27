@@ -1,3 +1,5 @@
+from core.zlog.zlog import Zlog
+
 from sqlalchemy import select
 from sqlalchemy.sql.expression import func
 
@@ -22,20 +24,30 @@ class ApplicationDatabaseController(DatabaseController):
         super().__init__(db_conf)
 
     def create(self):
-        self.connect()
-        Chat.__table__.create(self.engine, checkfirst=True)
-        Contact.__table__.create(self.engine, checkfirst=True)
-        ChatRelation.__table__.create(self.engine, checkfirst=True)
-        Message.__table__.create(self.engine, checkfirst=True)
-        self.disconnect()
+        Zlog.info("Create tables in the database:")
+        try:
+            self.connect()
+            Chat.__table__.create(self.engine, checkfirst=True)
+            Contact.__table__.create(self.engine, checkfirst=True)
+            ChatRelation.__table__.create(self.engine, checkfirst=True)
+            Message.__table__.create(self.engine, checkfirst=True)
+            self.disconnect()
+            Zlog.info("Tables in the database were created successfully.")
+        except:
+            Zlog.error("Error creating tables in the database.")
 
     def drop(self):
-        self.connect()
-        Message.__table__.drop(self.engine, checkfirst=True)
-        ChatRelation.__table__.drop(self.engine, checkfirst=True)
-        Contact.__table__.drop(self.engine, checkfirst=True)
-        Chat.__table__.drop(self.engine, checkfirst=True)
-        self.disconnect()
+        Zlog.warning("Drop tables in the database:")
+        try:
+            self.connect()
+            Message.__table__.drop(self.engine, checkfirst=True)
+            ChatRelation.__table__.drop(self.engine, checkfirst=True)
+            Contact.__table__.drop(self.engine, checkfirst=True)
+            Chat.__table__.drop(self.engine, checkfirst=True)
+            self.disconnect()
+            Zlog.warning("Tables in the database were droped successfully.")
+        except:
+            Zlog.error("Error droping tables in the database.")
 
     def get_chat_list(self):
         return self.execute_with_session(select(Chat))
