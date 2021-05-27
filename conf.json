@@ -12,5 +12,8 @@
             "drivername": "sqlite",
             "database": "/home/zver/.ViberPC/79629695983/viber.db"
         }
+    },
+    "settings": {
+        "process_sleep_time": 5
     }
 }

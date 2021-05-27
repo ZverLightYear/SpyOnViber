@@ -24,6 +24,9 @@ usage: spy_client.py
             "database": "/home/zver/.ViberPC/***********/viber.db"
         }
     }
+    "settings": {
+        "process_sleep_time": 5
+    }    
 }
 ```
 `databases` - содержит информацию о БД Viber `viber_db` и БД приложения `app_db`.
@@ -31,3 +34,7 @@ usage: spy_client.py
   * Для каждой БД задается набор параметров, необходимых для подключения к конкретной БД.
   * Обязательные поля: `drivername`, `database`. 
   * Опциональные поля: `username`, `password`, `host`, `port`.
+
+`settings` - хранит настройки клиента сбора сообщений.
+  * `process_sleep_time` - таймаут сбора новых сообщений.
+

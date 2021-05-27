@@ -1,4 +1,5 @@
 from sqlalchemy import select
+from sqlalchemy.sql.expression import func
 
 from core.db_controllers.db_controller import DatabaseController
 
@@ -39,14 +40,30 @@ class ApplicationDatabaseController(DatabaseController):
     def get_chat_list(self):
         return self.execute_with_session(select(Chat))
 
+    def get_last_chat_id(self):
+        with self.session() as sess:
+            return sess.query(func.max(Chat.ChatID))[0][0] or 0
+
     def get_contact_list(self):
         return self.execute_with_session(select(Contact))
+
+    def get_last_contact_id(self):
+        with self.session() as sess:
+            return sess.query(func.max(Contact.ContactID))[0][0] or 0
 
     def get_message_list(self):
         return self.execute_with_session(select(Message))
 
+    def get_last_message_id(self):
+        with self.session() as sess:
+            return sess.query(func.max(Message.MessageID))[0][0] or 0
+
     def get_chat_relation_list(self):
         return self.execute_with_session(select(ChatRelation))
+
+    def get_last_chat_relation_id(self):
+        with self.session() as sess:
+            return sess.query(func.max(Message.MessageID))[0][0] or 0
 
     def insert_chat(self, chat):
         with self.session.begin() as sess:
