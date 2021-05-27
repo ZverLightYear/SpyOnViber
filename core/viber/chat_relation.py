@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
+
 class ChatRelation(declarative_base()):
     """
     Модель таблицы ChatRelation БД Viber, задающая связь между контактами и чатами аккаунта.

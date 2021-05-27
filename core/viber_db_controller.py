@@ -1,4 +1,4 @@
-from db_controller import DatabaseController
+from core.db_controller import DatabaseController
 
 
 class ViberDatabaseController(DatabaseController):
@@ -10,4 +10,4 @@ class ViberDatabaseController(DatabaseController):
         Инициализация контроллера БД.
         :param db_conf: конфигурация БД Viber.
         """
-        super.__init__(db_conf)
+        super().__init__(db_conf)

@@ -1,6 +1,7 @@
 import json
-from core.db_controller import DatabaseController
+
 from core.viber_db_controller import ViberDatabaseController
+from core.app_db_controller import ApplicationDatabaseController
 
 
 if __name__ == '__main__':
@@ -11,7 +12,7 @@ if __name__ == '__main__':
     app_db_conf = database_conf["app_db"]
 
     viber_db = ViberDatabaseController(viber_db_conf)
-    app_db = DatabaseController(app_db_conf)
+    app_db = ApplicationDatabaseController(app_db_conf)
 
     viber_db.connect()
     app_db.connect()
