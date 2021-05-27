@@ -35,11 +35,11 @@ if __name__ == '__main__':
     viber_dbc.connect()
     app_dbc.connect()
 
-    drop_app_db(app_dbc.engine)
-    install_app_db(app_dbc.engine)
+    # drop_app_db(app_dbc.engine)
+    # install_app_db(app_dbc.engine)
 
-    # viber_dbc.select_mesages()
-    # app_dbc.query()
+    for msg in viber_dbc.get_messages_list():
+        print(msg)
 
     viber_dbc.close()
     app_dbc.close()

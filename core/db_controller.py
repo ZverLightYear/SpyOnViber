@@ -26,8 +26,8 @@ class DatabaseController(ABC):
         self.engine = create_engine(URL(**self.db_conf), echo=True)
 
     def query(self, query):
-        with self.engine.connect() as connection:
-            return connection.execute(query)
+        result = self.engine.execute(query)
+        return result
 
     def close(self):
         """
