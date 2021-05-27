@@ -24,19 +24,22 @@ def drop_app_db(app_engine):
 
 if __name__ == '__main__':
     conf = json.load(open(r"conf.json"))
-    database_conf = conf["database"]
+    databases_conf = conf["databases"]
 
-    viber_db_conf = database_conf["viber_db"]
-    app_db_conf = database_conf["app_db"]
+    viber_db_conf = databases_conf["viber_db"]
+    app_db_conf = databases_conf["app_db"]
 
-    viber_db = ViberDatabaseController(viber_db_conf)
-    app_db = ApplicationDatabaseController(app_db_conf)
+    viber_dbc = ViberDatabaseController(viber_db_conf)
+    app_dbc = ApplicationDatabaseController(app_db_conf)
 
-    viber_db.connect()
-    app_db.connect()
+    viber_dbc.connect()
+    app_dbc.connect()
 
     drop_app_db(app_dbc.engine)
     install_app_db(app_dbc.engine)
 
-    viber_db.close()
-    app_db.close()
+    # viber_dbc.select_mesages()
+    # app_dbc.query()
+
+    viber_dbc.close()
+    app_dbc.close()

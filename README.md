@@ -10,23 +10,24 @@ usage: spy_client.py
 ## Пример конфигурационного файла conf.json:
 ```
 {
-    "database": {
+    "databases": {
         "app_db": {
-             "ENGINE": "postgresql+psycopg2",
-             "USER": "sov_user",
-             "PASSWORD": "sov_user",
-             "HOST": "localhost",
-             "DB_NAME": "sov_db"
+             "drivername": "postgresql+psycopg2",
+             "username": "sov_user",
+             "password": "sov_user",
+             "host": "localhost",
+             "port": "5432"
+             "database": "sov_db"
         },
         "viber_db": {
-            "ENGINE": "sqlite",
-            "DB_NAME": "/home/user/.ViberPC/*******/viber.db"
+            "drivername": "sqlite",
+            "database": "/home/zver/.ViberPC/***********/viber.db"
         }
     }
 }
 ```
-`database` - содержит информацию о БД Viber `viber_db` и БД приложения `app_db`.
+`databases` - содержит информацию о БД Viber `viber_db` и БД приложения `app_db`.
 
   * Для каждой БД задается набор параметров, необходимых для подключения к конкретной БД.
-  * Обязательные поля: `ENGINE`, `DB_NAME`. 
-  * Опциональные поля: `USER`, `PASSWORD`, `HOST`, `PORT`.
+  * Обязательные поля: `drivername`, `database`. 
+  * Опциональные поля: `username`, `password`, `host`, `port`.

@@ -1,13 +1,15 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
+from core.models.viber.event import Event
+
 
 class Message(declarative_base()):
     """
     Модель таблицы Messages БД Viber, содержащая информацию обо всех сообщениях всех чатов аккаунта.
     """
     __tablename__ = 'Messages'
-    EventID = Column(Integer, ForeignKey('Events.EventID'), primary_key=True, onupdate="CASCADE")
+    EventID = Column(Integer, ForeignKey(Event.EventID), primary_key=True, onupdate="CASCADE")
     Type = Column(Integer, nullable=False)
     Status = Column(Integer, nullable=False)
     Subject = Column(String(500))

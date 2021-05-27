@@ -1,6 +1,8 @@
-from sqlalchemy import Column, Integer
+from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
+from core.models.viber.chat import Chat
+from core.models.viber.contact import Contact
 
 class Event(declarative_base()):
     """
@@ -13,8 +15,8 @@ class Event(declarative_base()):
     Type = Column(Integer, nullable=False)
     ContactLongitude = Column(Integer, default=0)
     ContactLatitude = Column(Integer, default=0)
-    ChatID = Column(Integer, onupdate="CASCADE")            # references ChatInfo(ChatID)
-    ContactID = Column(Integer, onupdate="CASCADE")         # references Contact(ContactID)
+    ChatID = Column(Integer, ForeignKey(Chat.ChatID), onupdate="CASCADE")
+    ContactID = Column(Integer, ForeignKey(Contact.ContactID), onupdate="CASCADE")
     IsSessionLifeTime = Column(Integer, default=0)          # integer(0, 1)
     Flags = Column(Integer, default=0)
     Token = Column(Integer, nullable=False)
