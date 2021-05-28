@@ -26,7 +26,7 @@ class DatabaseController(ABC):
         self.url = URL(**self.db_conf)
 
     @abstractmethod
-    def create(self):
+    def create_with_check(self):
         """
         Создание таблиц БД.
         """
@@ -48,8 +48,8 @@ class DatabaseController(ABC):
             self.engine = create_engine(self.url)
             self.session = sessionmaker(self.engine)
             Zlog.info("[OK]", without_prefix=True)
-        except:
-            Zlog.error("[FAIL]", without_prefix=True)
+        except Exception as err:
+            Zlog.error(f"[FAIL] {err}", without_prefix=True)
 
     @abstractmethod
     def get_contact_list(self):
@@ -103,5 +103,5 @@ class DatabaseController(ABC):
             del self.engine
             self.engine = None
             Zlog.info("[OK]", without_prefix=True)
-        except:
-            Zlog.error("[FAIL]", without_prefix=True)
+        except Exception as err:
+            Zlog.error(f"[FAIL] {err}", without_prefix=True)

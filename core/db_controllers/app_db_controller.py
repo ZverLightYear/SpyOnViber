@@ -23,7 +23,7 @@ class ApplicationDatabaseController(DatabaseController):
         """
         super().__init__(db_conf)
 
-    def create(self):
+    def create_with_check(self):
         Zlog.info("Create tables in the database:")
         try:
             self.connect()
@@ -33,8 +33,9 @@ class ApplicationDatabaseController(DatabaseController):
             Message.__table__.create(self.engine, checkfirst=True)
             self.disconnect()
             Zlog.info("Tables in the database were created successfully.")
-        except:
-            Zlog.error("Error creating tables in the database.")
+        except Exception as err:
+            Zlog.error(f"Error creating tables in the database: {err}")
+
 
     def drop(self):
         Zlog.warning("Drop tables in the database:")
@@ -45,9 +46,9 @@ class ApplicationDatabaseController(DatabaseController):
             Contact.__table__.drop(self.engine, checkfirst=True)
             Chat.__table__.drop(self.engine, checkfirst=True)
             self.disconnect()
-            Zlog.warning("Tables in the database were droped successfully.")
-        except:
-            Zlog.error("Error droping tables in the database.")
+            Zlog.warning("Tables in the database were dropped successfully.")
+        except Exception as err:
+            Zlog.error(f"Error dropping tables in the database: {err}")
 
     def get_chat_list(self):
         return self.execute_with_session(select(Chat))

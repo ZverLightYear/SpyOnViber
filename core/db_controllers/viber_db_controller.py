@@ -21,7 +21,7 @@ class ViberDatabaseController(DatabaseController):
         """
         super().__init__(db_conf)
 
-    def create(self):
+    def create_with_check(self):
         pass
 
     def drop(self):
