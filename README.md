@@ -71,14 +71,14 @@ SHOW config_file;
              "username": "sov_user",
              "password": "sov_user",
              "host": "localhost",
-             "port": "5432"
+             "port": "5432",
              "database": "sov_db"
         },
         "viber_db": {
             "drivername": "sqlite",
             "database": "/home/user/.ViberPC/***********/viber.db"
         }
-    }
+    },
     "settings": {
         "logging": {
             "level": "DEBUG"
