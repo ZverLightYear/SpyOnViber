@@ -76,7 +76,7 @@ SHOW config_file;
         },
         "viber_db": {
             "drivername": "sqlite",
-            "database": "/home/user/.ViberPC/***********/viber.db"
+            "database": "/home/<user>/.ViberPC/<phone_number>/viber.db"
         }
     },
     "settings": {
