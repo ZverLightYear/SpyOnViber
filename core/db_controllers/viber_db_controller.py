@@ -39,8 +39,8 @@ class ViberDatabaseController(DatabaseController):
         Запрещаем любое активное вмешательство в БД Viber.
         :return: raise OperationalError
         """
-        Zlog.error(f"Don't touch Viber database, please.")
-        raise OperationalError
+        Zlog.error(f"Don't touch Viber database, please!")
+        raise OperationalError(None, None, None)
 
     def drop_tables(self):
         """
@@ -48,8 +48,8 @@ class ViberDatabaseController(DatabaseController):
         Запрещаем любое активное вмешательство в БД Viber.
         :return: raise OperationalError
         """
-        Zlog.error(f"Don't touch Viber database, please.")
-        raise OperationalError
+        Zlog.error(f"Don't touch Viber database, please!")
+        raise OperationalError(None, None, None)
 
     def get_new_rows(self, model, pk_last_values):
         """

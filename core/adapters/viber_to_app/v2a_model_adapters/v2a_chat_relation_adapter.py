@@ -14,6 +14,8 @@ class V2AChatRelationAdapter(ModelAdapter):
     def translate(self, viber_chat_relation: ViberChatRelation):
         """
         Транслирование модели ChatRelation Viber в модель ChatRelation приложения.
+        :param viber_chat_relation: модель ChatRelation Viber.
+        :return AppChatRelation: модель ChatRelation приложения.
         """
         app_chat_relation = AppChatRelation()
         app_chat_relation.ChatID = viber_chat_relation.ChatID

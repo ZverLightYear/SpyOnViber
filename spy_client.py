@@ -1,26 +1,15 @@
-import json
 import time
+
+from core.config_parser import parse_config
 from core.zlog.zlog import Zlog
 
 from core.db_controllers.viber_db_controller import ViberDatabaseController
 from core.db_controllers.app_db_controller import ApplicationDatabaseController
 
-from core.adapters.viber_to_app.v2a_database_adapter import V2ADatabaseAdapter
+from core.adapters.viber_to_app.v2a_adapter import V2AAdapter
 
 if __name__ == '__main__':
-    conf = json.load(open(r"conf.json"))
-
-    logging_conf = conf["settings"]["logging"]
-    Zlog.logLevel = logging_conf["level"]
-
-    databases_conf = conf["databases"]
-    Zlog.info("Startup config:")
-    Zlog.info(json.dumps(databases_conf, indent=4))
-
-    sleep_time = conf["settings"]["process_sleep_time"]
-
-    viber_db_conf = databases_conf["viber_db"]
-    app_db_conf = databases_conf["app_db"]
+    app_db_conf, viber_db_conf, sleep_time = parse_config()
 
     viber_dbc = ViberDatabaseController(viber_db_conf)
     app_dbc = ApplicationDatabaseController(app_db_conf)
@@ -28,7 +17,7 @@ if __name__ == '__main__':
     app_dbc.drop_tables()
     app_dbc.create_tables_with_check()
 
-    v2a_db_adapter = V2ADatabaseAdapter(viber_dbc, app_dbc)
+    v2a_db_adapter = V2AAdapter(viber_dbc, app_dbc)
     try:
         while True:
             Zlog.info("*"*100)

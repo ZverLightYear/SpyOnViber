@@ -8,7 +8,7 @@ from core.adapters.viber_to_app.v2a_model_adapters.v2a_chat_adapter import V2ACh
 from core.adapters.viber_to_app.v2a_model_adapters.v2a_chat_relation_adapter import V2AChatRelationAdapter
 
 
-class V2ADatabaseAdapter(DatabaseAdapter):
+class V2AAdapter(DatabaseAdapter):
     def __init__(self, viber_dbc, app_dbc):
         """
         Инициализация транслятора БД Viber в БД приложения.

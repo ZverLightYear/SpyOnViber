@@ -14,6 +14,8 @@ class V2AContactAdapter(ModelAdapter):
     def translate(self, viber_contact: ViberContact):
         """
         Транслирование модели Contact Viber в модель Contact приложения.
+        :param viber_contact: модель Contact Viber.
+        :return AppChatRelation: модель Contact приложения.
         """
         app_contact = AppContact()
         app_contact.ContactID = viber_contact.ContactID

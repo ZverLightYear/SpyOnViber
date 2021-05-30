@@ -11,9 +11,11 @@ class V2AMessageAdapter(ModelAdapter):
         """
         pass
 
-    def translate(self, viber_message_join_event: ViberMessage):
+    def translate(self, viber_message_join_event):
         """
         Транслирование модели Message Viber в модель Message приложения.
+        :param viber_message_join_event: модель Message Viber join Events Viber.
+        :return AppChatRelation: модель Message приложения.
         """
         app_message = AppMessage()
         app_message.MessageID = viber_message_join_event.EventID

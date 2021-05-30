@@ -14,6 +14,8 @@ class V2AChatAdapter(ModelAdapter):
     def translate(self, viber_chat: ViberChat):
         """
         Транслирование модели Chat Viber в модель Chat приложения.
+        :param viber_chat: модель Chat Viber.
+        :return AppChat: модель Chat приложения.
         """
         app_chat = AppChat()
         app_chat.ChatID = viber_chat.ChatID
