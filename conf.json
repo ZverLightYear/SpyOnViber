@@ -10,7 +10,7 @@
         },
         "viber_db": {
             "drivername": "sqlite",
-            "database": "C:\\Users\\Zverev\\AppData\\Roaming\\ViberPC\\79629695983\\viber.db"
+            "database": "C:\\Users\\<user>\\AppData\\Roaming\\ViberPC\\<phone_number>\\viber.db"
         }
     },
     "settings": {
