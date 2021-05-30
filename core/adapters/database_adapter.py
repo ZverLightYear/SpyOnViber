@@ -4,5 +4,5 @@ from abc import abstractmethod, ABC
 
 class DatabaseAdapter(ABC):
     @abstractmethod
-    def translate(self):
+    def translate_all(self):
         pass

@@ -5,7 +5,7 @@ from core.zlog.zlog import Zlog
 from core.db_controllers.viber_db_controller import ViberDatabaseController
 from core.db_controllers.app_db_controller import ApplicationDatabaseController
 
-from core.adapters.viber_to_app.viber_to_app_database_adapter import ViberToAppDatabaseAdapter
+from core.adapters.viber_to_app.v2a_database_adapter import V2ADatabaseAdapter
 
 if __name__ == '__main__':
     conf = json.load(open(r"conf.json"))
@@ -26,14 +26,14 @@ if __name__ == '__main__':
     app_dbc = ApplicationDatabaseController(app_db_conf)
 
     # app_dbc.drop()
-    app_dbc.create_with_check()
+    app_dbc.create_tables_with_check()
 
-    v2a_db_adapter = ViberToAppDatabaseAdapter(viber_dbc, app_dbc)
+    v2a_db_adapter = V2ADatabaseAdapter(viber_dbc, app_dbc)
     try:
         while True:
             Zlog.info("*"*100)
             Zlog.info(f"Start new lifecycle")
-            v2a_db_adapter.translate()
+            v2a_db_adapter.translate_all()
             Zlog.info(f"Sleep {sleep_time}")
             time.sleep(sleep_time)
     finally:

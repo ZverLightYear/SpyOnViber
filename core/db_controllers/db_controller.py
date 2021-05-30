@@ -25,20 +25,6 @@ class DatabaseController(ABC):
         self.db_conf = db_conf
         self.url = URL(**self.db_conf)
 
-    @abstractmethod
-    def create_with_check(self):
-        """
-        Создание таблиц БД.
-        """
-        pass
-
-    @abstractmethod
-    def drop(self):
-        """
-        Удаление таблиц БД
-        """
-        pass
-
     def connect(self):
         """
         Подключение к БД с созданием сессии.
@@ -52,45 +38,18 @@ class DatabaseController(ABC):
             Zlog.error(f"[FAIL] {err}", without_prefix=True)
 
     @abstractmethod
-    def get_contact_list(self):
+    def create_tables_with_check(self):
         """
-        Полуение списка всех контактов.
-        :return: список контактов.
-        """
-        pass
-
-    @abstractmethod
-    def get_chat_list(self):
-        """
-        Полуение списка всех чатов.
-        :return: список чатов.
+        Создание таблиц БД.
         """
         pass
 
     @abstractmethod
-    def get_message_list(self):
+    def drop_tables(self):
         """
-        Полуение списка всех сообщений.
-        :return: список сообщений.
-        """
-        pass
-
-    @abstractmethod
-    def get_chat_relation_list(self):
-        """
-        Полуение списка всех связей контактов с чатами.
-        :return: список связей контактов с чатами.
+        Удаление таблиц БД.
         """
         pass
-
-    def execute_with_session(self, query):
-        """
-        Выполнить запрос с открытием сессии.
-        :param query: запрос.
-        :return: результат выполнения запроса.
-        """
-        with self.session() as sess:
-            return sess.query(query).all()
 
     def disconnect(self):
         """

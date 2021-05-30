@@ -15,6 +15,17 @@ class ModelAdapter(ABC):
         pass
 
     @abstractmethod
+    def model_to(self):
+        pass
+
+    @abstractmethod
+    def model_from(self):
+        pass
+
+    def models(self):
+        return self.model_from(), self.model_to()
+
+    @abstractmethod
     def translate(self, in_arg):
         """
         Трансляция модели.

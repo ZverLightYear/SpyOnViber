@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from core.models.viber.chat import Chat
 from core.models.viber.contact import Contact
 
+
 class Event(declarative_base()):
     """
     Модель таблицы Events БД Viber, содержащая информацию обо всех событиях всех чатов аккаунта.
