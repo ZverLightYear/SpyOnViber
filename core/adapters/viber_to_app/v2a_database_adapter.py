@@ -1,7 +1,5 @@
 from core.zlog.zlog import Zlog
 
-from sqlalchemy.inspection import inspect
-
 from core.adapters.database_adapter import DatabaseAdapter
 
 from core.adapters.viber_to_app.model_adapters.v2a_contact_adapter import V2AContactAdapter
@@ -12,9 +10,16 @@ from core.adapters.viber_to_app.model_adapters.v2a_chat_relation_adapter import 
 
 class V2ADatabaseAdapter(DatabaseAdapter):
     def __init__(self, viber_dbc, app_dbc):
+        """
+        Инициализация транслятора БД Viber в БД приложения.
+        :param viber_dbc: контроллер БД Viber.
+        :param app_dbc: контроллер БД приложения.
+        """
         self.viber_dbc = viber_dbc
         self.app_dbc = app_dbc
 
+        # Задаем трансляторы БД в корректном порядке.
+        # Порядок определяется связями моделей.
         self.adapters = [
             V2AContactAdapter(),
             V2AChatAdapter(),
@@ -22,15 +27,10 @@ class V2ADatabaseAdapter(DatabaseAdapter):
             V2AMessageAdapter()
         ]
 
-    def connect(self):
-        self.viber_dbc.connect()
-        self.app_dbc.connect()
-
-    def disconnect(self):
-        self.viber_dbc.disconnect()
-        self.app_dbc.disconnect()
-
     def translate_all(self):
+        """
+        Транслировать все модели БД Viber в БД приложения.
+        """
         self.connect()
 
         for model_adapter in self.adapters:
@@ -38,16 +38,31 @@ class V2ADatabaseAdapter(DatabaseAdapter):
 
         self.disconnect()
 
+    def connect(self):
+        """
+        Подключиться к контроллерам БД Viber и приложения.
+        """
+        self.viber_dbc.connect()
+        self.app_dbc.connect()
+
+    def disconnect(self):
+        """
+        Отключиться от контроллеров БД Viber и приложения.
+        """
+        self.viber_dbc.disconnect()
+        self.app_dbc.disconnect()
+
     def translate_model(self, model_adapter):
+        """
+        Транслировать модель БД Viber в модель БД приложения.
+        :param model_adapter: транслятор модели БД Viber в модель БД приложения.
+        """
         model_from, model_to = model_adapter.models()
 
-        model_to_primary_keys = inspect(model_to).primary_key
-        model_from_primary_keys = inspect(model_from).primary_key
+        app_model_last_id = self.app_dbc.get_last_model_id(model_to)
+        viber_model_new_row_list = self.viber_dbc.get_new_rows(model_from, app_model_last_id)
 
-        app_last_model_id = list(map(self.app_dbc.get_last_model_id, model_to_primary_keys))
-        viber_new_model_list = self.viber_dbc.get_new_rows(model_from, model_from_primary_keys, app_last_model_id)
+        Zlog.info(f"New entries to {model_to.__tablename__} model: {len(viber_model_new_row_list)}")
 
-        Zlog.info(f"New entries to {model_to.__tablename__} model: {len(viber_new_model_list)}")
-
-        app_model_list = model_adapter.translate_list(viber_new_model_list)
-        self.app_dbc.insert_bulk_rows(app_model_list)
+        app_model_new_rows = model_adapter.translate_list(viber_model_new_row_list)
+        self.app_dbc.insert_bulk_rows(app_model_new_rows)

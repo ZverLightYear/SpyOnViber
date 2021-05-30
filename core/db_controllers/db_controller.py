@@ -27,7 +27,7 @@ class DatabaseController(ABC):
 
     def connect(self):
         """
-        Подключение к БД с созданием сессии.
+        Подключение к БД с созданием сессии. Открытие сессии при этом не производится.
         """
         Zlog.info(f"Connecting to database {self.url} ...", end='')
         try:
@@ -53,7 +53,7 @@ class DatabaseController(ABC):
 
     def disconnect(self):
         """
-        Закрытие подключения к БД с закрытием сессии.
+        Закрытие подключения к БД.
         """
         Zlog.info(f"Disconnecting database {self.url} ...", end='')
         try:

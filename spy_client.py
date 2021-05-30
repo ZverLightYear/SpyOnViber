@@ -25,7 +25,7 @@ if __name__ == '__main__':
     viber_dbc = ViberDatabaseController(viber_db_conf)
     app_dbc = ApplicationDatabaseController(app_db_conf)
 
-    # app_dbc.drop()
+    app_dbc.drop_tables()
     app_dbc.create_tables_with_check()
 
     v2a_db_adapter = V2ADatabaseAdapter(viber_dbc, app_dbc)

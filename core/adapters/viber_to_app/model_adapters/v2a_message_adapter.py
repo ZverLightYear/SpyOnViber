@@ -6,9 +6,15 @@ from core.models.viber.message import Message as ViberMessage
 
 class V2AMessageAdapter(ModelAdapter):
     def __init__(self):
+        """
+        Инициализация адаптера модели Message Viber в модель Message приложения.
+        """
         pass
 
     def translate(self, viber_message_join_event: ViberMessage):
+        """
+        Транслирование модели Message Viber в модель Message приложения.
+        """
         app_message = AppMessage()
         app_message.MessageID = viber_message_join_event.EventID
         app_message.ChatID = viber_message_join_event.ChatID
@@ -23,7 +29,13 @@ class V2AMessageAdapter(ModelAdapter):
         return app_message
 
     def model_to(self):
+        """
+        :return: модель Message приложения, в которую адаптер производит трансляцию.
+        """
         return AppMessage
 
     def model_from(self):
+        """
+        :return: модель Message Viber, которую транслирует адаптер.
+        """
         return ViberMessage

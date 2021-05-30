@@ -16,13 +16,22 @@ class ModelAdapter(ABC):
 
     @abstractmethod
     def model_to(self):
+        """
+        :return: модель, в которую адаптер производит трансляцию.
+        """
         pass
 
     @abstractmethod
     def model_from(self):
+        """
+        :return: модель, которую транслирует адаптер.
+        """
         pass
 
     def models(self):
+        """
+        :return: модели from и to. Адаптер транслирует модель from в модель to.
+        """
         return self.model_from(), self.model_to()
 
     @abstractmethod
