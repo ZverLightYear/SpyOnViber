@@ -2,10 +2,10 @@ from core.zlog.zlog import Zlog
 
 from core.adapters.database_adapter import DatabaseAdapter
 
-from core.adapters.viber_to_app.model_adapters.v2a_contact_adapter import V2AContactAdapter
-from core.adapters.viber_to_app.model_adapters.v2a_message_adapter import V2AMessageAdapter
-from core.adapters.viber_to_app.model_adapters.v2a_chat_adapter import V2AChatAdapter
-from core.adapters.viber_to_app.model_adapters.v2a_chat_relation_adapter import V2AChatRelationAdapter
+from core.adapters.viber_to_app.v2a_model_adapters.v2a_contact_adapter import V2AContactAdapter
+from core.adapters.viber_to_app.v2a_model_adapters.v2a_message_adapter import V2AMessageAdapter
+from core.adapters.viber_to_app.v2a_model_adapters.v2a_chat_adapter import V2AChatAdapter
+from core.adapters.viber_to_app.v2a_model_adapters.v2a_chat_relation_adapter import V2AChatRelationAdapter
 
 
 class V2ADatabaseAdapter(DatabaseAdapter):
