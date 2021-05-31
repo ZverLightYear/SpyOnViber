@@ -24,14 +24,24 @@ class ViberDatabaseController(DatabaseController):
         :param db_conf: конфигурация БД Viber.
         """
         super().__init__(db_conf)
+
         # задаем правила обращения к моделям БД Viber.
         self.select_by_model = {
             Chat.__tablename__: select(Chat),
             Contact.__tablename__: select(Contact),
             ChatRelation.__tablename__: select(ChatRelation),
             Event.__tablename__: select(Event),
-            Message.__tablename__: select(Message, Event).join(Event, Event.EventID == Message.EventID)
+            Message.__tablename__: select(Message, Event).join(Event, Event.EventID == Message.EventID),
         }
+
+    @staticmethod
+    def __touching_db_error():
+        """
+        Вывод сообщения об ошибке с просьбой не трогать БД Viber =).
+        Выбрасываем исключение OperationalError.
+        """
+        Zlog.error(f"Don't touch Viber database, please!")
+        raise OperationalError(None, None, None)
 
     def create_tables_with_check(self):
         """
@@ -39,8 +49,7 @@ class ViberDatabaseController(DatabaseController):
         Запрещаем любое активное вмешательство в БД Viber.
         :return: raise OperationalError
         """
-        Zlog.error(f"Don't touch Viber database, please!")
-        raise OperationalError(None, None, None)
+        self.__touching_db_error()
 
     def drop_tables(self):
         """
@@ -48,8 +57,7 @@ class ViberDatabaseController(DatabaseController):
         Запрещаем любое активное вмешательство в БД Viber.
         :return: raise OperationalError
         """
-        Zlog.error(f"Don't touch Viber database, please!")
-        raise OperationalError(None, None, None)
+        self.__touching_db_error()
 
     def get_new_rows(self, model, pk_last_values):
         """

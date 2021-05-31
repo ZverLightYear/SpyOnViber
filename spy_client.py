@@ -17,13 +17,15 @@ if __name__ == '__main__':
     app_dbc.drop_tables()
     app_dbc.create_tables_with_check()
 
-    v2a_db_adapter = V2AAdapter(viber_dbc, app_dbc)
+    v2a_adapter = V2AAdapter(viber_dbc, app_dbc)
     try:
         while True:
             Zlog.info("*"*200, without_prefix=True)
-            Zlog.info(f"Start new lifecycle")
-            v2a_db_adapter.translate_all()
-            Zlog.info(f"Sleep {sleep_time}")
+            Zlog.info("Start new lifecycle:")
+
+            v2a_adapter.translate_all()
+
+            Zlog.info(f"Sleep {sleep_time}.")
             time.sleep(sleep_time)
     finally:
         viber_dbc.disconnect()

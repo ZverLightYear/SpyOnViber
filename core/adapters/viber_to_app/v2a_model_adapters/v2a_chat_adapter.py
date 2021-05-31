@@ -5,6 +5,10 @@ from core.models.viber.chat import Chat as ViberChat
 
 
 class V2AChatAdapter(ModelAdapter):
+    """
+    Адаптер модели Chat Viber в модель Chat приложения.
+    """
+
     def __init__(self):
         """
         Инициализация адаптера модели Chat Viber в модель Chat приложения.

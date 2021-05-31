@@ -5,6 +5,10 @@ from core.models.viber.message import Message as ViberMessage
 
 
 class V2AMessageAdapter(ModelAdapter):
+    """
+    Адаптер модели Message Viber в модель Message приложения.
+    """
+
     def __init__(self):
         """
         Инициализация адаптера модели Message Viber в модель Message приложения.

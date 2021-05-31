@@ -5,6 +5,10 @@ from core.models.viber.contact import Contact as ViberContact
 
 
 class V2AContactAdapter(ModelAdapter):
+    """
+    Адаптер модели Contact Viber в модель Contact приложения.
+    """
+
     def __init__(self):
         """
         Инициализация адаптера модели Contact Viber в модель Contact приложения.

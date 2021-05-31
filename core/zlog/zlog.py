@@ -3,15 +3,16 @@ from termcolor import colored
 
 
 class Zlog:
-    logLevel = "NONE"
+    """
+    Логгер сообщений
+    """
 
+    logLevel = "NONE"
     tags = {"info": {"tag": " [ * ]", "color": "white"},
             "error": {"tag": " [ ! ]", "color": "red"},
             "debug": {"tag": " [ @ ]", "color": "yellow"},
             "warning": {"tag": " [ ! ]", "color": "yellow"},
             "": {"tag": "      ", "color": "grey"}}
-
-    Types = []
 
     @staticmethod
     def isDebug():

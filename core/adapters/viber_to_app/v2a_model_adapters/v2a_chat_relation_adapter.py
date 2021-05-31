@@ -5,6 +5,10 @@ from core.models.viber.chat_relation import ChatRelation as ViberChatRelation
 
 
 class V2AChatRelationAdapter(ModelAdapter):
+    """
+    Адаптер модели ChatRelation Viber в модель ChatRelation приложения.
+    """
+
     def __init__(self):
         """
         Инициализация адаптера модели ChatRelation Viber в модель ChatRelation приложения.

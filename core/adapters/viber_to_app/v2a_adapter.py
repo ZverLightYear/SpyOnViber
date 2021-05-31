@@ -9,6 +9,10 @@ from core.adapters.viber_to_app.v2a_model_adapters.v2a_chat_relation_adapter imp
 
 
 class V2AAdapter(DatabaseAdapter):
+    """
+    Адаптер моделей Viber в модели приложения.
+    """
+
     def __init__(self, viber_dbc, app_dbc):
         """
         Инициализация транслятора БД Viber в БД приложения.
