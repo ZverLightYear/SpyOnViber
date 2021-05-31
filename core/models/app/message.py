@@ -10,8 +10,8 @@ class Message(declarative_base()):
     Модель таблицы Messages БД приложения, содержащая информацию обо всех сообщениях всех чатов аккаунта.
     """
     __tablename__ = 'Message'
-    MessageID = Column(Integer, primary_key=True)
-    ChatID = Column(Integer, ForeignKey(Chat.ChatID))
+    MessageID = Column(Integer, index=True, primary_key=True)
+    ChatID = Column(Integer, ForeignKey(Chat.ChatID), index=True)
     SenderID = Column(Integer, ForeignKey(Contact.ContactID))
     TimeStamp = Column(String, nullable=False)
     Type = Column(Integer, nullable=False)

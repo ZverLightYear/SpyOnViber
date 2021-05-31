@@ -20,7 +20,7 @@ if __name__ == '__main__':
     v2a_db_adapter = V2AAdapter(viber_dbc, app_dbc)
     try:
         while True:
-            Zlog.info("*"*100)
+            Zlog.info("*"*200, without_prefix=True)
             Zlog.info(f"Start new lifecycle")
             v2a_db_adapter.translate_all()
             Zlog.info(f"Sleep {sleep_time}")
